@@ -30,6 +30,13 @@ EDUCATION:
 - List education in reverse chronological order
 - grade should be the classification, GPA, or score if present, otherwise ""
 
+OTHER:
+- "role" and "company" must always be split. Role is the job title only (e.g. "Full Stack Developer Intern"). Company is the organisation name only (e.g. "Sudo-code Ltd"). Never combine them.
+- "name" for projects must be the project title only. Never include URLs, repo paths, or GitHub handles in the name field. If a GitHub/repo URL is present, put it in the "url" field.
+- Dates must strictly follow MM/YYYY format. "Jul 2024" becomes "07/2024". Never omit the slash or the leading zero.
+- If a location contains spaces, preserve them exactly. "City Center" must not become "CityCenter".
+- If an array has no real data, return it as [] not as an array containing empty objects.
+
 STRICT OUTPUT FORMAT:
 {
   "personal": {

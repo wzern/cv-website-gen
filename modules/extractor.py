@@ -4,8 +4,10 @@ from pathlib import Path
 
 EXTRACTION_SYSTEM_PROMPT = Path("prompts/extraction_prompt.txt").read_text(encoding="utf-8")
 
-def extract_cv_data(cv_text: str) -> dict:
+def extract_cv_data(cv_text: str, links: list[str] = []) -> dict:
     """Send CV text to Ollama and return structured JSON data"""
+
+    links_str = "\n".join(links) if links else "None found"
     
     response: ChatResponse = chat(model='mistral:7b', messages=[
         {
@@ -14,7 +16,7 @@ def extract_cv_data(cv_text: str) -> dict:
         },
         {
             'role': 'user',
-            'content': f'Parse the following CV and return the JSON:\n\n{cv_text}',
+            'content': f'Parse the following CV and return the JSON.\n\nCV TEXT:\n{cv_text}\n\nHYPERLINKS FOUND IN DOCUMENT:\n{links_str}',
         },
     ])
 

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="{{ theme }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ personal.name }}</title>
+    <link rel="stylesheet" href="./style.css">
+    <style>:root { --accent: {{ accent }}; }</style>
+</head>
+<body>
+
+<button class="theme-toggle" onclick="toggleTheme()">
+    <span class="theme-toggle-icon">◑</span>
+    <span class="theme-toggle-label">theme</span>
+</button>
+
+<div class="container">
+
+    {# ── HERO ─────────────────────────────────────────────────── #}
+    <header class="hero">
+        <p class="hero-label">// portfolio</p>
+        <h1 class="hero-name">{{ personal.name }}</h1>
+        {% if personal.title %}
+        <p class="hero-title">{{ personal.title }}</p>
+        {% endif %}
+        {% if personal.summary %}
+        <p class="hero-summary">{{ personal.summary }}</p>
+        {% endif %}
+        <div class="hero-links">
+            {% if personal.email %}
+            <a class="hero-link" href="mailto:{{ personal.email }}">
+                <span class="hero-link-icon">✉</span> {{ personal.email }}
+            </a>
+            {% endif %}
+            {% if personal.location %}
+            <span class="hero-link">
+                <span class="hero-link-icon">⌂</span> {{ personal.location }}
+            </span>
+            {% endif %}
+            {% if personal.github %}
+            <a class="hero-link" href="{{ personal.github }}" target="_blank" rel="noopener">
+                <span class="hero-link-icon">◈</span> {{ personal.github }}
+            </a>
+            {% endif %}
+            {% if personal.linkedin %}
+            <a class="hero-link" href="{{ personal.linkedin }}" target="_blank" rel="noopener">
+                <span class="hero-link-icon">❐</span> {{ personal.linkedin }}
+            </a>
+            {% endif %}
+            {% if personal.website %}
+            <a class="hero-link" href="{{ personal.website }}" target="_blank" rel="noopener">
+                <span class="hero-link-icon">◉</span> {{ personal.website }}
+            </a>
+            {% endif %}
+            {% if personal.phone %}
+            <span class="hero-link">
+                <span class="hero-link-icon">☏</span> {{ personal.phone }}
+            </span>
+            {% endif %}
+        </div>
+    </header>
+
+    {# ── EXPERIENCE ───────────────────────────────────────────── #}
+    {% if experience %}
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Experience</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="timeline">
+            {% for job in experience %}
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-meta">
+                    <span class="timeline-date">{{ job.start_date }} — {{ job.end_date }}</span>
+                    {% if job.location %}
+                    <span class="timeline-location">{{ job.location }}</span>
+                    {% endif %}
+                </div>
+                {% if job.role %}
+                <div class="timeline-role">{{ job.role }}</div>
+                {% endif %}
+                {% if job.company %}
+                <div class="timeline-company">{{ job.company }}</div>
+                {% endif %}
+                {% if job.bullets %}
+                <ul class="timeline-bullets">
+                    {% for bullet in job.bullets %}
+                    <li>{{ bullet }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    {# ── EDUCATION ────────────────────────────────────────────── #}
+    {% if education %}
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Education</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="timeline">
+            {% for edu in education %}
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-meta">
+                    <span class="timeline-date">{{ edu.start_date }} — {{ edu.end_date }}</span>
+                </div>
+                <div class="timeline-role">
+                    {{ edu.degree }}{% if edu.field %} in {{ edu.field }}{% endif %}
+                </div>
+                {% if edu.institution %}
+                <div class="timeline-company">{{ edu.institution }}</div>
+                {% endif %}
+                {% if edu.grade %}
+                <div class="timeline-company">{{ edu.grade }}</div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    {# ── SKILLS ───────────────────────────────────────────────── #}
+    {% if skills %}
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Skills</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="skills-grid">
+            {% for skill in skills %}
+            {% if skill %}
+            <span class="skill-tag">{{ skill }}</span>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    {# ── PROJECTS ─────────────────────────────────────────────── #}
+    {% if projects %}
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Projects</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="projects-grid">
+            {% for project in projects %}
+            <div class="project-card">
+                <div class="project-name">
+                    {% if project.url %}
+                    <a href="{{ project.url }}" target="_blank" rel="noopener">{{ project.name }}</a>
+                    {% else %}
+                    {{ project.name }}
+                    {% endif %}
+                </div>
+                {% if project.description %}
+                <p class="project-description">{{ project.description }}</p>
+                {% endif %}
+                {% if project.technologies %}
+                <div class="project-tech">
+                    {% for tech in project.technologies %}
+                    {% if tech %}
+                    <span>{{ tech }}</span>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    {# ── CERTIFICATIONS ───────────────────────────────────────── #}
+    {% if certifications %}
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Certifications</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="cert-list">
+            {% for cert in certifications %}
+            {% if cert.name %}
+            <div class="cert-item">
+                <span class="cert-name">{{ cert.name }}</span>
+                <span class="cert-meta">
+                    {% if cert.issuer %}{{ cert.issuer }}{% endif %}
+                    {% if cert.issuer and cert.date %} · {% endif %}
+                    {% if cert.date %}{{ cert.date }}{% endif %}
+                </span>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    {# ── LANGUAGES ────────────────────────────────────────────── #}
+    {% if languages %}
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Languages</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="lang-list">
+            {% for lang in languages %}
+            {% if lang.language %}
+            <div class="lang-item">
+                <span class="lang-name">{{ lang.language }}</span>
+                {% if lang.proficiency %}
+                <span class="lang-proficiency">{{ lang.proficiency }}</span>
+                {% endif %}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    <footer class="footer">
+        generated with <span>cv-portfolio-gen</span>
+    </footer>
+
+</div>
+
+<script>
+    function toggleTheme() {
+        const html = document.documentElement;
+        const isDark = html.getAttribute('data-theme') === 'dark';
+        html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    }
+</script>
+
+</body>
+</html>
