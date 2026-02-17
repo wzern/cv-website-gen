@@ -10,4 +10,7 @@ wheels/
 .venv
 
 # CV inputs
-cv/*
+cv/
+
+# Website Results
+output/
