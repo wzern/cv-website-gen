@@ -29,7 +29,7 @@ The LLM is only used for the extraction step. HTML generation is handled entirel
 ## Setup
 
 ```bash
-git clone https://github.com/yourusername/cv-website-gen
+git clone https://github.com/wzern/cv-website-gen
 cd cv-website-gen
 uv sync
 ```
